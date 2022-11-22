@@ -1,0 +1,146 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css' />
+	<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+	<!-- pop up box -->
+	<link href="{% static 'css/popuo-box.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<!-- font-awesome icons -->
+	<link href="{% static 'css/fontawesome-all.min.css' %}" rel="stylesheet">
+	<!-- //Custom Theme files -->
+	<!-- online fonts -->
+	<!-- titles -->
+	<link href="//fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+	<!-- body -->
+	<link href="//fonts.googleapis.com/css?family=Poppins:400,500,600,700,800" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Garbage</title>
+</head>
+<body>
+<header>
+	<div class="top">
+			<div class="container">
+				<div class="t-op row">
+					<div class="col-sm-6 top-middle">
+						<!--<ul>
+							<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+						</ul>-->
+					</div>
+					<div class="col-sm-6 top-left">
+						<!--<ul>
+							<li><i class="fas fa-phone"></i>+91 9895984568</li>
+						</ul>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<h1>
+					<a class="navbar-brand text-capitalize" href="http://127.0.0.1:8000/home/one/">
+						Garbage
+					</a>
+				</h1>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+				    aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav text-center  ml-lg-auto">
+						<li class="nav-item active  mr-3">
+							<a class="nav-link" href="http://127.0.0.1:8000/home/one/">Home
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item  mr-3">
+							<a class="nav-link" href="http://127.0.0.1:8000/home/four/">About</a>
+						</li>
+						<li class="nav-item  mr-3">
+							<a class="nav-link" href="http://127.0.0.1:8000/home/seven/">Services</a>
+						</li>
+						<li class="nav-item dropdown mr-3">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+							    aria-expanded="false">
+								Register AS
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="http://127.0.0.1:8000/home/zero/"> Signup</a>
+								<!--<a class="dropdown-item" href="http://127.0.0.1:8000/home/three/">House Signup</a>-->
+								<a class="dropdown-item" href="http://127.0.0.1:8000/home/two/">Login</a>
+								<!--<a class="dropdown-item" href="http://127.0.0.1:8000/home/two/">House Login</a>-->
+
+
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="http://127.0.0.1:8000/home/five/">contact</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+{% block content %} {% endblock %}
+
+<script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>
+<!-- js-->
+<!-- Banner Responsiveslides -->
+	<script src="{% static 'js/responsiveslides.min.js' %}"></script>
+	<script>
+		// You can also use "$(window).load(function() {"
+		$(function () {
+			// Slideshow 4
+			$("#slider3").responsiveSlides({
+				auto: true,
+				pager: true,
+				nav: false,
+				speed: 500,
+				namespace: "callbacks",
+				before: function () {
+					$('.events').append("<li>before event fired.</li>");
+				},
+				after: function () {
+					$('.events').append("<li>after event fired.</li>");
+				}
+			});
+
+		});
+	</script>
+<!-- // Banner Responsiveslides -->
+<!-- stats -->
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'js/jquery.countup.js' %}"></script>
+		<script>
+			$('.counter').countUp();
+		</script>
+<!-- //stats -->
+<!--pop-up-box -->
+	<script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+	<script>
+		$(document).ready(function () {
+			$('.popup-with-zoom-anim').magnificPopup({
+				type: 'inline',
+				fixedContentPos: false,
+				fixedBgPos: true,
+				overflowY: 'auto',
+				closeBtnInside: true,
+				preloader: false,
+				midClick: true,
+				removalDelay: 300,
+				mainClass: 'my-mfp-zoom-in'
+			});
+		});
+	</script>
+	<!-- //pop-up-box -->
+	<!-- Bootstrap Core JavaScript -->
+	<script src="{% static 'js/bootstrap.js' %}">
+	</script>
+
+</body>
+</html>

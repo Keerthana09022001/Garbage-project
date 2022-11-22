@@ -1,0 +1,491 @@
+<!--author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>    
+<title>Garbage Registration Form</title>
+<!-- meta_tags-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Garbage Registration A Flat Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+	function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Meta_tag_Keywords-->
+<!--css_files-->
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}"/>
+	<link href="{% static 'css/style4.css' %}" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.css' %}"><!--font_wesome_icons-->
+	<link href="//fonts.googleapis.com/css?family=PT+Sans+Caption" rel="stylesheet"><!--online_fonts-->
+	<link href="//fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet"><!--online_fonts-->
+<!--//css_files-->
+</head>
+<body>
+<div class="w3l-head">
+<h1>Garbage Registration</h1>
+</div>
+<div class="w3ls-form">
+<script>document.getElementById("myForm").reset();</script>
+<form onsubmit ="return first_nameValidation() && last_nameValidation()  && emailValidation() && addressValidation() && land_markValidation() && stateValidation() && pincodeValidation() && passwordValidation() && cpasswordValidation()"  action="{% url 'registration1' %}" method="POST"  id="myForm">
+   {% csrf_token %}
+		{% include 'message.html' %}
+	<div class="w3l-last-grid1">
+		<div class="w3l-grid1">
+			<label class="text">Register As </label>
+				<div class="w3l-div">
+					<select  name="role" id="role" class="form-contro3" required="">
+						<option value="" selected disabled>Select</option>
+<!--						<option value="is_driverreg">Driver</option>-->
+						<option value="is_customer">Customer</option>
+					</select>
+				</div>
+		</div>
+
+		<div class="w3l-right-grid1">
+			<div class="w3l-grid1">
+				<label class="text">First name</label>
+				<div class="w3l-div">
+					<i class="fa fa-user" aria-hidden="true"></i>
+					<input type="text" name="first_name" placeholder="first name" onkeyup='first_nameValidation(this)' required/>
+					               <span class="error-msg" id="first_name"> </span><br>
+
+				</div>
+			</div>
+
+			<!--<div class="w3l-grid2">
+			<label class="text">Middle name</label>
+			<div class="w3l-div">
+				<i class="fa fa-user" aria-hidden="true"></i>
+				<input type="text" name="first_name" placeholder="middle name" onkeyup='first_nameValidation(this)' required/>
+				            <span class="error-msg" id="first_name"> </span><br>
+
+			</div>
+			</div>-->
+			<div class="w3l-grid2">
+			<label class="text">Last name</label>
+			<div class="w3l-div">
+				<i class="fa fa-user" aria-hidden="true"></i>
+				<input type="text" name="last_name" placeholder="last name" onkeyup='last_nameValidation(this)' required/>
+				            <span class="error-msg" id="last_name"> </span><br>
+
+			</div>
+			</div>
+
+			<div class="w3l-grid2">
+				<label class="text">Primary Contact Number</label>
+				<div class="w3l-div">
+					<i class="fa fa-phone" aria-hidden="true"></i>
+					<input type="text" name="phone" placeholder="phone number" onkeyup='phoneValidation(this)' required/>
+					<span class="error-msg" id="phone"></span>
+
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="w3l-last-grid1">
+			<div class="w3l-grid1">
+				<label class="text">gender</label>
+				<div class="w3l-div">
+					<!--<i class="fa fa-users" aria-hidden="true"></i>-->
+					<select class="form-control" required="">
+						<option>gender</option>
+						<option>Male</option>
+						<option>Female</option>
+					</select>
+				</div>
+			</div>
+			<div class="w3l-grid2">
+				<label class="text">Secondary Contact Number</label>
+				<div class="w3l-div">
+					<i class="fa fa-phone" aria-hidden="true"></i>
+					<input type="text" name="phone1" placeholder="phone number" onkeyup='phoneValidation(this)' required/>
+					<span class="error-msg" id="phone1"></span>
+
+				</div>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+		<div class="w3l-last-grid1">
+			<div class="w3l-grid1">
+				<label class="text">Your Email</label>
+				<div class="w3l-div">
+					<i class="fa fa-envelope-o" aria-hidden="true"></i>
+					<input type="email" name="email" placeholder="e-mail" onkeyup='emailValidation(this)' required/>
+					               <span class="error-msg" id="email"> </span><br>
+
+				</div>
+			</div>
+			<div class="w3l-last-grid2">
+			<div class="w3l-grid2">
+				<label class="text">address</label>
+				<div class="w3l-div">
+					<i class="fa fa-location-arrow" aria-hidden="true"></i>
+					<input type="text" name="address" placeholder="current address" onkeyup='addressValidation(this)' required/>
+					<span class="error-msg" id="address"></span>
+
+				</div>
+			</div>
+				<div class="w3l-grid2">
+				<label class="text">zipcode</label>
+				<div class="w3l-div">
+					<i class="fa fa-address-card-o" aria-hidden="true"></i>
+					<input type="text" name="pincode" placeholder="postal" onkeyup='pincodeValidation(this)' required/>
+					               <span class="error-msg" id="pincode"></span><br>
+
+				</div>
+			</div>
+			<div class="w3l-last-grid1">
+			<div class="w3l-grid1">
+				<label class="text">city</label>
+				<div class="w3l-div">
+					<i class="fa fa-map-marker" aria-hidden="true"></i>
+					<input type="text" name="land_mark" placeholder="city" onkeyup='cityValidation(this)' required/>
+					<span class="error-msg" id="land_mark"></span>
+
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!--<div class="w3l-last-grid1">
+			<div class="w3l-grid1">
+				<label class="text">address</label>
+				<div class="w3l-div">
+					<i class="fa fa-location-arrow" aria-hidden="true"></i>
+					<input type="text" name="address" placeholder="current address" required=""/>
+				</div>
+			</div>-->
+			<!--<div class="w3l-grid2">
+				<label class="text">city</label>
+				<div class="w3l-div">
+					<i class="fa fa-map-marker" aria-hidden="true"></i>
+					<input type="text" name="city" placeholder="city" required=""/>
+				</div>
+			</div>-->
+			<div class="clear"></div>
+		</div>
+
+			<!--<div class="w3l-grid2">
+				<label class="text">zipcode</label>
+				<div class="w3l-div">
+					<i class="fa fa-address-card-o" aria-hidden="true"></i>
+					<input type="text" name="zipcode" placeholder="postal" required=""/>
+				</div>
+			</div>-->
+			<div class="clear"></div>
+		<!--</div>-->
+		
+		<div class="w3l-right-grid1">
+		<div class="w3l-grid1">
+			<label class="text">District </label>
+				<div class="w3l-div">
+                    <!--<select name="district">-->
+					<select  name="district" id="district" class="form-contro3" required="">
+						<option value="district" selected disabled>Select Your District</option>
+						<option value="Trivandrum">Trivandrum</option>
+						<option value="Kollam">Kollam</option>
+						<option value="Pathanamthitta">Pathanamthitta</option>
+						<option value="Alappuzha">Alappuzha</option>
+						<option value="Kottayam">Kottayam</option>
+						<option value="Idukki">Idukki</option>
+						<option value="Ernakulam">Ernakulam</option>
+						<option value="Thrissur">Thrissur</option>
+						<option value="Palakkad">Palakkad</option>
+						<option value="Malappuram">Malappuram</option>
+						<option value="Kozhikode">Kozhikode</option>
+						<option value="Wayanad">Wayanad</option>
+						<option value="Kannur">Kannur</option>
+						<option value="Kasaragod">Kasaragod</option>
+					</select>
+				</div>
+		</div>
+			<label class="text">State</label>
+			<div class="w3l-grid2">
+				<div class="w3l-div">
+					<!--<i class="fa fa-book" aria-hidden="true"></i>-->
+					<select name="state" id="state"  class="form-contro2" required="">
+						<option value="state" selected disabled>Select Your State</option>
+						<option>Kerala</option>
+
+					</select>
+				</div>
+			</div>
+		</div>
+
+<div class="w3l-grid2">
+         <label class="text">Password</label>
+         <div class="w3l-div">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <input type="password" name="password" placeholder=" Password" id="pass1" onkeyup='passwordValidation(this)' required/>
+            <span class="error-msg" id="password"></span><br>
+
+         </div>
+      </div>
+      <div class="w3l-grid2">
+         <label class="text">Confirm Password</label>
+         <div class="w3l-div">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <input type="password" name="confirmpassword" placeholder="Confirm Password"id="pass2" onkeyup='cpasswordValidation(this)' required/>
+            <span class="error-msg" id="confirmpassword"> </span><br>
+         </div>
+      </div>
+		<div class="clear"></div>
+		<div class="w3ls-submit">
+			<input type="submit" value="Register">
+		</div>
+</form>
+</div>
+
+<script type="text/javascript">
+
+function first_nameValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]+$/;
+    var textField = document.getElementById("first_name");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 2){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+
+        textField.style.color = "red";
+    }
+}
+
+function last_nameValidation(inputTxt){
+
+    var regx = /^[a-zA-Z  ]+$/;
+    var textField = document.getElementById("last_name");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 1){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function addressValidation(inputTxt){
+
+    var regx = /^[a-zA-Z-()]+$/;
+    var textField = document.getElementById("address");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 4){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function emailValidation(inputTxt){
+    // ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
+    var regx = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    var textField = document.getElementById("email");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+        }else{
+            textField.textContent = 'email is not valid!!!';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function phoneValidation(inputTxt){
+
+    var regx = /^[6-9][0-9]{9}$/;
+    var textField = document.getElementById("phone");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid phone number';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function cityValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]+$/;
+    var textField = document.getElementById("land_mark");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 1){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function stateValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]+$/;
+    var textField = document.getElementById("state");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 1){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function pincodeValidation(inputTxt){
+
+    var regx = /^[6][0-9]{5}$/;
+    var textField = document.getElementById("pincode");
+
+    if(inputTxt.value != '' ){
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only valid pincode';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function passwordValidation(inputTxt){
+
+    var regx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+    var textField = document.getElementById("password");
+
+    if(inputTxt.value != '' ){
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'Must contain at least one number and one uppercase and lowercase letter and aleast 5 characters';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function cpasswordValidation(inputTxt){
+
+    var regx =  document.getElementById("pass1").value;
+    var regy =  document.getElementById("pass2").value;
+    var textField = document.getElementById("confirmpassword");
+    var textField1 = document.getElementById("password");
+
+    if(inputTxt.value != '' ){
+            if(regx == regy){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'not match';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = '';
+            textField.style.color = "red";
+        }
+}
+
+  </script>
+
+
+</body>
+</html>
+{% endblock %}
