@@ -5,11 +5,13 @@
 <html>
 
 <head>
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" ></script>
 	<title>Garbage Login</title>
 	<!-- Meta-Tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<meta name="keywords" content="Spin Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+<!--	<meta name="keywords" content="Spin Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">-->
 	<script>
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -35,7 +37,7 @@
 		<span></span>
 	</div>
 	<div class="w3ls-login box box--big">
-		<form onsubmit ="emailValidation() && passwordValidation() && cpasswordValidation()"  action="{% url 'home2' %}" method="POST"  id="myForm">
+		<form onsubmit ="return validatee()"  action="{% url 'home2' %}" method="POST"  id="myForm">
 			{% csrf_token %}
 			<div class="agile-field-txt">
 
@@ -58,18 +60,15 @@
 					<a href="forgotPassword/">forgot password?</a>
 				</div>
 			</div>
-			<!-- script for show password -->
-<!--			<script>-->
-<!--				function myFunction() {-->
-<!--					var x = document.getElementById("myInput");-->
-<!--					if (x.type === "password") {-->
-<!--						x.type = "text";-->
-<!--					} else {-->
-<!--						x.type = "password";-->
-<!--					}-->
-<!--				}-->
-<!--			</script>-->
-			<!-- //end script -->
+
+			<div class="form-group last mb-4">
+              <div style="margin-left:+0%;">
+                <div class="g-recaptcha" data-sitekey="6LdCjb0kAAAAAEHZlkAgugW_bi92xkYtxECYRGzi"></div>
+
+<div id="g-recaptcha-error"></div>
+</div>
+</div>
+
 				<input type="submit" value="LOGIN">
 		</form>
 		<div>
@@ -125,6 +124,29 @@ function passwordValidation(inputTxt){
     }
 }
 
+ function validatee() {
+            var pass=document.getElementById('password').value;
+            var email=document.getElementById('email').value;
+
+            if (grecaptcha.getResponse() == "") {
+
+                document.getElementById('g-recaptcha-error').textContent = "Enter the Captcha";
+                document.getElementById("g-recaptcha-error").style.color = "red";
+                return false;
+            }
+            else if (grecaptcha.getResponse() == "") {
+                alert(response)
+                document.getElementById('g-recaptcha-error').innerHTML =
+                    '<span style="color:red;">This field is required.</span>';
+                return false;
+            } else if(!emailValidation(email)){
+                document.getElementById('email').textContent="please enter the email";
+                document.getElementById('email').style.color="red";
+                return false
+            }
+            else {
+                return true;
+        }    }
 </script>
 </body>
 </html>

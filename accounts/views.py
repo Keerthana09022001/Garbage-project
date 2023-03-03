@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate,login
 from django.http import HttpResponse
 from .models import Account
 from django.views.decorators.cache import cache_control
+import razorpay
 
 
 
@@ -60,7 +61,8 @@ def signup(request):
             user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email,  land_mark=land_mark, address=address, pincode=pincode, state=state, district=district, contact=mob, role=role, password=password, is_customer=is_customer)
             user.save()
             messages.success(request, 'Thank you for registering with us')
-            return redirect('login')
+            # return redirect('login')
+            return redirect('payment_page')
 
     else:
         return render(request,'registration1.html')
@@ -91,6 +93,7 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
 def change_password(request):
     if request.method == 'POST':
         current_password = request.POST['current_password']
@@ -129,7 +132,7 @@ def forgotPassword(request):
             send_mail(
                 'Please activate your account',
                 message,
-                'garbages422@gmail.com',
+                'garbagemanagement3@gmail.com',
                 [email],
                 fail_silently=False,
             )
@@ -177,6 +180,32 @@ def resetPassword(request):
         return render(request, 'ResetPassword.html')
 
 
+
+
+def payment_page(request):
+
+    client = razorpay.Client(auth=("rzp_test_n7irR21xKIBPBj", "4DNQcF66EGnIWV2huNtZXz0Q"))
+
+    DATA = {
+        "amount": 500,
+        "currency": "INR",
+        "receipt": "receipt#1",
+
+    }
+    client.order.create(data=DATA)
+    return render(request,"payment.html")
+
+def payment_done(request):
+    if request.session['email'] == 'null':
+        return redirect('accounts/login')
+
+    elif 'email' in request.session:
+        email = request.session['email']
+        public = Account.objects.get(email=email)
+        messages.info(request, "successfully registered")
+        public.status = 1
+        public.save()
+        return redirect('registration1.html')
 
 
 

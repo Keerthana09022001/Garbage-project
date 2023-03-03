@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Garbage_Management.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  #_psycopg2
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME':'Garbage2',
         'USER':'postgres',
         'PASSWORD':'root',
@@ -154,9 +154,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'garbages422@gmail.com'
-DEFAULT_FROM_EMAIL = 'garbages422@gmail.com'
-SERVER_EMAIL = 'garbages422@gmail.com'
-EMAIL_HOST_PASSWORD = 'cexqzmfkphlyefab'
-
+EMAIL_HOST_USER = 'garbagemanagement3@gmail.com'
+DEFAULT_FROM_EMAIL = 'garbagemanagement3@gmail.com'
+SERVER_EMAIL = 'garbagemanagement3@gmail.com'
+EMAIL_HOST_PASSWORD = 'rpsshxhehqzgryul'
+RECAPTCHA_PUBLIC_KEY = '6Lc2Rr0kAAAAAODy6HzDXmW6oyRcI3DgoSRk8UuQ'
+RECAPTCHA_PRIVATE_KEY = '6Lc2Rr0kAAAAAJJanfb28XfvhAqQjCO0McMcbRH4'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+RAZORPAY_API_KEY="rzp_test_n7irR21xKIBPBj"
+RAZORPAY_API_SECRET_KEY="4DNQcF66EGnIWV2huNtZXz0Q"
 EMAIL_USE_TLS = True

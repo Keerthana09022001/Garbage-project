@@ -11,6 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>    
 <title>Garbage Registration Form</title>
 <!-- meta_tags-->
+<!--	<script src="https://www.paypal.com/sdk/js?client-id=AfuC3AmSXXCoA6mPDqJSI-wsRdZHm6EoVupY56zkkYcybUCivWPoD6-6eanR3z6r-1yjdEubMbJEzMeT&currency=USD"></script>-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Garbage Registration A Flat Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
@@ -237,9 +238,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="clear"></div>
 		<div class="w3ls-submit">
 			<input type="submit" value="Register">
+<!--			<div id="paypal-button-container">-->
+                <!-- MAKE PAYMENT -->
+            </div>
 		</div>
 </form>
 </div>
+<script>
+
+
+
+
+
+<!--  paypal.Buttons({-->
+<!--    style: {-->
+<!--      color: 'blue',-->
+<!--      shape: 'pill',-->
+<!--      label: 'pay',-->
+<!--      height: 40-->
+<!--    },-->
+<!--    // Order is created on the server and the order id is returned-->
+<!--    createOrder:function(data,actions) {-->
+<!--      return actions.order.create({-->
+<!--        purchase_units:[{-->
+
+<!--          amount:{-->
+<!--              value: 500,-->
+<!--          }-->
+<!--        }]-->
+<!--      });-->
+<!--  },-->
+<!--    onApprove: function(data,actions) {-->
+<!--      return actions.order.capture().then(function(details){-->
+<!--          console.log(details);-->
+
+
+<!--                  });-->
+<!--          }-->
+
+<!--  }).render('#paypal-button-container');-->
+<!--  -->
+
+
+
+  </script>
 
 <script type="text/javascript">
 
@@ -254,6 +296,7 @@ function first_nameValidation(inputTxt){
 
             if(inputTxt.value.match(regx)){
                 textField.textContent = '';
+
                 textField.style.color = "green";
 
             }else{
