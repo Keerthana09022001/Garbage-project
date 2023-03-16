@@ -23,7 +23,7 @@ admin.site.index_title="Garbage"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include("Home.urls")),
+    path('', include("Home.urls")),
     path('accounts/', include('accounts.urls'))
 
 ]

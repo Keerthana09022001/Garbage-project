@@ -1,21 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+     <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Services</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+</head>
+<body>
 <form action="/payment_success/" method="POST" id="myform">
     {% csrf_token %}
 
-<!--        <font color="white"> enter the otp here :-->
-<!--            <br><input type="tel" id="otp"  minlength="6" maxlength="6" onkeyup="return check();">-->
-<!--            <span id="otp_var"></span></font><br>-->
-<!--        <input type="text" id="otp1" style="display:none;" value="{{token}}">-->
+    <h2><p style="text-align: center;"><strong>Payment Agreement</strong></p></h2><br>
+<ul style="text-align: justify;">
+<li style="list-style-type: none;">
+    <li style="list-style-type: none;">
+    <ul align="left">
+<li><span data-preserver-spaces="true">Fee should pay to get the membership</span></li>
+        <li><span data-preserver-spaces="true">The membership Amount is 500</span></li>
+<li><span data-preserver-spaces="true">Garbage management payment details vary depending on the location and the type of waste management service being provided. However, here are some general points that may apply:</span></li>
+<li><span data-preserver-spaces="true">Many cities and municipalities provide waste management services to their residents. These services may be included in property taxes or charged separately as a fee.</span></li>
+<li><span data-preserver-spaces="true">Some waste management services charge a flat rate for garbage collection, while others may charge based on the amount or weight of garbage generated.</span></li>
+<li><span data-preserver-spaces="true">Some waste management services also offer recycling and composting programs, which may have separate fees or may be included in the overall waste management fee.</span></li>
+<li><span data-preserver-spaces="true">Commercial businesses may have to pay additional fees for waste management services, depending on the amount and type of waste they generate.</span></li>
+<li><span data-preserver-spaces="true">It's important to check with your local waste management provider or municipality for specific details about garbage management payment in your area.</span></li>
 
-<!--    <br>-->
-
-    <button class="boxed-btn"  id="rzp-button1" ><b><font size="6"><i> Pay Now</i></font></b></button><br>
+</ul>
+</li>
+</ul>
+    <center><button class="boxed-btn"  id="rzp-button1"  ><b><font size="6" ><i> Pay Now</i></font></b></button></center><br>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
-    "key": "rzp_test_n7irR21xKIBPBj",
-    "amount": "50000",
+    "key": "rzp_test_BH4piEaEn2Yzwj",
+    "amount": "100000",
     "currency": "INR",
-    "name": "Garbage Management System",
+    "name": "Library",
     "description": "Test Transaction",
     "image": "https://example.com/your_logo",
     "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -23,7 +68,6 @@ var options = {
    "handler": function (response){
                                 console.log("success")
                                 var form = document.getElementById["myform"];
-
 
 
                                 var a = response.razorpay_payment_id;
@@ -52,3 +96,7 @@ document.getElementById('rzp-button1').onclick = function(e){
     e.preventDefault();
 }
 </script></form>
+
+
+</body>
+</html>

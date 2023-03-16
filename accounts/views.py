@@ -195,6 +195,7 @@ def payment_page(request):
     client.order.create(data=DATA)
     return render(request,"payment.html")
 
+
 def payment_done(request):
     if request.session['email'] == 'null':
         return redirect('accounts/login')

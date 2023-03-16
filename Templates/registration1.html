@@ -8,7 +8,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 {% block content %}
 <!DOCTYPE html>
 <html>
-<head>    
+<head>
+
+
+
+	<script>
+window.onload = function () {
+    document.getElementById("download")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("ab");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'Bus_pass.pdf',
+                image: { type: 'jpeg', quality: 0.99 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a3', orientation: 'p' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+</script>
+
+
 <title>Garbage Registration Form</title>
 <!-- meta_tags-->
 <!--	<script src="https://www.paypal.com/sdk/js?client-id=AfuC3AmSXXCoA6mPDqJSI-wsRdZHm6EoVupY56zkkYcybUCivWPoD6-6eanR3z6r-1yjdEubMbJEzMeT&currency=USD"></script>-->
