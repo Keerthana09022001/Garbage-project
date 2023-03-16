@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Bins,complaintpost
+from .models import Bins,complaintpost,Feed_back
 def hom(request):
     return render(request, 'index.html')
 def registration(request):
@@ -24,6 +24,17 @@ def driverregistration(request):
 def complaint(request):
     return render(request,'complaint.html')
 
+def feedback(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        feedbacktype = request.POST.get("feedbacktype")
+        des_feedback = request.POST.get("des_feedback")
+        print(name, email, feedbacktype,des_feedback)
+        rev =Feed_back.objects.create(name=name,email=email,feedbacktype=feedbacktype,des_feedback=des_feedback)
+        rev.save()
+
+    return render(request,'feedback.html')
 
 
 def Views_bin(request):

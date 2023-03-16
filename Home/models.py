@@ -92,6 +92,8 @@ class complaintpost(models.Model):
 
     def __str__(self):
         return self.c_landmark
+
+
 class workupdation(models.Model):
     work_id = models.AutoField(primary_key=True)
     Bin_id = models.ForeignKey(Bins,verbose_name='Bin_name',on_delete=models.DO_NOTHING,default="")
@@ -105,6 +107,12 @@ class workupdation(models.Model):
 
 
 
+class Feed_back(models.Model):
+    feed_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100,null=True)
+    email = models.CharField(max_length=100,null=True)
+    feedbacktype = models.CharField(max_length=1000,null=True)
+    des_feedback = models.CharField(max_length=1000,null=True)
 
 
 
