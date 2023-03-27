@@ -25,7 +25,6 @@ def driverregistration(request):
 def complaint(request):
     return render(request,'complaint.html')
 
-
 def feedback(request):
     if request.method == 'POST':
         name = request.POST.get("name")
