@@ -75,3 +75,4 @@ def searchbar(request):
             product_count = products.count()
             print(product_count)
             return render(request,'searchbar.html',{'products':products})
+
