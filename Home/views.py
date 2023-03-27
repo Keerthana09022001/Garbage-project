@@ -24,8 +24,7 @@ def driverregistration(request):
     return render(request, 'driverreg.html')
 def complaint(request):
     return render(request,'complaint.html')
-def product(request):
-    return render(request,'products.html')
+
 
 def feedback(request):
     if request.method == 'POST':
