@@ -1,38 +1,40 @@
 
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="colorlib.com">
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
-  </head>
-  <body>
-    <div class="s01">
-      <form>
-        <fieldset>
-          <legend>Search Here.....</legend>
-        </fieldset>
-        <div class="inner-form">
-          <div class="input-field first-wrap">
-            <input id="search" type="text" placeholder="What are you looking for?" />
-          </div>
-          <div class="input-field second-wrap">
-            <form action="{% url 'thirteen'%}" method="GET">
-            <input id="location" type="text" placeholder="Bin Name" name="query" required="required" />
-              </form>
-          </div>
-          <div class="input-field third-wrap">
-            <button class="btn-search" type="button">Search</button>
+{% block body %}
+      <div class="card-body">
+        <p class="card-text">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Bin Name</th>
+                  <th scope="col">Bin Location</th>
+                  <th scope="col">Bin color</th>
+                  <th scope="col">Bin Address1</th>
+                  <th scope="col">Bin Address2</th>
+                  <th scope="col">Day</th>
+                </tr>
+              </thead>
+              <body>
+                {% for i in products %}
+                  <tr>
+                    <td>{{ i.Bin_name }}</td>
+                    <td>{{ i.Bin_location }}</td>
+                    <td>{{ i.Bin_color }}</td>
+                    <td>{{ i.Bin_address1 }}</td>
+                    <td>{{ i.Bin_address2 }}</td>
+                    <td>{{ i.collections_day }}</td>
 
-        </div>
-      </form>
+
+                  </tr>
+                {% endfor %}
+              </body>
+            </table>
+          </div>
+        </p>
+      </div>
     </div>
 
-  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+  </div>
+</div>
 {% endblock %}

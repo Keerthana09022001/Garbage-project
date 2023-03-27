@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Bins,complaintpost,Feed_back
+from django.db.models import Q
 def hom(request):
     return render(request, 'index.html')
 def registration(request):
@@ -23,6 +24,8 @@ def driverregistration(request):
     return render(request, 'driverreg.html')
 def complaint(request):
     return render(request,'complaint.html')
+def product(request):
+    return render(request,'products.html')
 
 def feedback(request):
     if request.method == 'POST':
@@ -61,28 +64,26 @@ def Complaint(request):
 
 
 def searchbar(request):
-    if request.method == 'GET':
-        query = request.GET.get('query')
-        if query:
-            Bin_name = Bins.objects.filter(Bin_name__icontains=query)
-            return render(request, 'searchresult.html', {'Bin_name':Bin_name})
-        else:
-            print("No information to show")
-            return render(request, 'searchbar.html', {})
+    if request.method=='GET':
 
-def searchresult(request):
-    return render(searchresult,'searchresult.html')
+        keyword = request.GET.get('keyword')
+        print(keyword)
 
+        if keyword:
 
-#
-# def create_superuser(self, password, email, **extra_fields):
-#     user = self.create_user(
-#         email=self.normalize_email(email),
-#         password=password, **extra_fields
-#
-#     )
-#     user.is_admin = True
-#     user.is_active = True
-#     user.is_staff = True
-#     user.is_superadmin = True
-#     user.save(using=self._db)
+            products =Bins.objects.all().filter(Q(Bin_name__icontains=keyword) | Q(Bin_location__region__icontains=keyword))
+            print(products)
+
+            product_count = products.count()
+            print(product_count)
+            return render(request,'searchbar.html',{'products':products})
+
+    # context = {
+    #
+    #     'results': products,
+    #
+    #     'product_count': product_count,
+    #
+    # }
+    #
+    # return render(request, 'searchbar.html', context)

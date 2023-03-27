@@ -4,6 +4,19 @@
 
 <html>
     <head>
+        <li class="nav-item">
+      <div id="search" class="pop-overlay">
+          <div class="popup">
+            <form action="{% url 'searchbar' %}" method="GET" class="d-sm-flex">
+              {% csrf_token %}
+              {% include 'Message.html' %}
+              <input type="text" placeholder="Search.." name="keyword" required="required" >
+              <button type="submit">Search</button>
+
+            </form>
+          </div>
+        </div>
+</li>
         <title>Bin</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial scale=1.0">
@@ -25,15 +38,7 @@
                     <h12>Collection</h12>
                         <label for="file">On progress:</label>
                 <progress id="file" value="55" max="100"> 55% </progress>
-<!--                    <p>{{i.Bin_status}}</p>-->
-
-
-
-
-
-
-
-                    <button class="buy-1">Contact</button>
+                <button class="buy-1">Contact</button>
                         </div>
 {% endfor %}
 

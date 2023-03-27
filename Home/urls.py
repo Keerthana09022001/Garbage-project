@@ -15,8 +15,9 @@ urlpatterns = [
     path('ten/',views.driverregistration),
     path('eleven',views.Views_bin,name='eleven'),
     path('twelve',views.Complaint,name='twelve'),
-    path('thirteen',views.searchbar,name='thirteen'),
-    path('fourteen',views.searchresult,name='fourteen'),
-    path('feedback',views.feedback,name='feedback')
+    path('feedback',views.feedback,name='feedback'),
+    path('product',views.product,name='product'),
+    path('searchbar',views.searchbar,name='searchbar'),
+
 
 ]
