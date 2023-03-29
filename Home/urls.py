@@ -17,6 +17,8 @@ urlpatterns = [
     path('twelve',views.Complaint,name='twelve'),
     path('feedback',views.feedback,name='feedback'),
     path('searchbar',views.searchbar,name='searchbar'),
+    path('shopping',views.products,name='shopping'),
+
 
 
 ]

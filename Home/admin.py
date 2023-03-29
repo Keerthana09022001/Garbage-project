@@ -1,7 +1,7 @@
 from django.contrib import admin
 import csv
 from django.http import HttpResponse
-from .models import vehicle,employee,bin_color,Bins,location,Driver, complaintpost,workupdation,scheduleingday,Feed_back
+from .models import vehicle,employee,bin_color,Bins,location,Driver,complaintpost,workupdation,scheduleingday,Feed_back,product
 from django.contrib.auth.models import Group
 # admin.site.register(Bins)
 # admin.site.register(vehicle)
@@ -13,6 +13,7 @@ admin.site.register(complaintpost)
 # admin.site.register(workupdation)
 # admin.site.register(scheduleingday)
 admin.site.register(Feed_back)
+admin.site.register(product)
 def export_bin(modeladmin, request, queryset):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="Bins.csv"'

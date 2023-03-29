@@ -114,6 +114,18 @@ class Feed_back(models.Model):
     feedbacktype = models.CharField(max_length=1000,null=True)
     des_feedback = models.CharField(max_length=1000,null=True)
 
+    def __str__(self):
+        return self.name
+
+
+class product(models.Model):
+    prd_id=models.AutoField(primary_key=True)
+    prd_name=models.CharField(max_length=100,default='')
+    prd_discription=models.CharField(max_length=200, unique=True)
+    prd_img= models.ImageField(upload_to='product')
+    prd_price=models.IntegerField(max_length=15)
+    def __str__(self):
+            return self.prd_name
 
 
 

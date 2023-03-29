@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Bins,complaintpost,Feed_back
+from .models import Bins,complaintpost,Feed_back,product
+
 from django.db.models import Q
 def hom(request):
     return render(request, 'index.html')
@@ -42,6 +43,11 @@ def Views_bin(request):
     viewbin = Bins.objects.all()
 
     return render(request,"see.html",{'Bins':viewbin})
+
+def products(request):
+    product_value = product.objects.all()
+
+    return render(request,"shopping.html",{'product':product_value})
 
 def Complaint(request):
     print('2')
