@@ -4,14 +4,14 @@
 
 <html>
     <head>
-        <li class="nav-item">
-      <div id="search" class="pop-overlay">
+        <li class="nav-item"    style="width: 218px;">
+      <div id="search" class="pop-overlay" style="width:25%; padding: 15%;" >
           <div class="popup">
             <form action="{% url 'searchbar' %}" method="GET" class="d-sm-flex">
               {% csrf_token %}
               {% include 'Message.html' %}
-              <input type="text" placeholder="Search.." name="keyword" required="required" >
-              <button type="submit">Search</button>
+              <input type="text" placeholder="Search Location" name="keyword" required="required" >
+              <button type="submit" style="color: #f4511e; padding: 100%;   width: 200%;">Search</button>
 
             </form>
           </div>
@@ -39,9 +39,15 @@
                 <progress id="file" value="55" max="100"> 55% </progress>
                 <button class="buy-1">Contact</button>
                         </div>
+
+
+
 {% endfor %}
 
-            <style>
+
+
+
+                <style>
            body{
     margin: 0;
     font-family: sans-serif;
@@ -159,6 +165,7 @@ button{
 }
 
 </style>
+
 
         </body>
         </html>
