@@ -128,16 +128,16 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+STATIC_DIR=os.path.join(BASE_DIR,'static')
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'static')
+        STATIC_DIR
 ]
-STATIC_ROOT=os.path.join(BASE_DIR,'assets')
+# STATIC_ROOT=os.path.join(BASE_DIR,'assets')
 
 
-MEDIA_URL='photos/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'photos')
+MEDIA_URL='/images/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'static/images')
 # #SMTP Configruation
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
