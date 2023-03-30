@@ -100,7 +100,6 @@ def addcart(request,id):
     print(user)
     item = product.objects.get(prd_id=id)
 
-
     if Cart.objects.filter(products_id=item).exists():
         cart = Cart.objects.all()
         context = {'newcart': cart}
@@ -113,3 +112,18 @@ def addcart(request,id):
         cart=Cart.objects.all()
         context={'newcart':cart}
         return render(request,'cart.html',context)
+
+def cart(request):
+    cart = Cart.objects.filter(prd_id=id)
+    total = 0
+    for i in cart:
+        total += i.product.prd_price * i.product_qty
+
+    return render(request, 'cart.html',{'cart': cart, 'total': total})
+
+def de_cart(request, id):
+    Cart.objects.get(id=id).delete()
+
+    return redirect(cart)
+
+
