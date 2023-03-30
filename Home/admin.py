@@ -7,13 +7,13 @@ from django.contrib.auth.models import Group
 # admin.site.register(vehicle)
 # admin.site.register(employee)
 admin.site.register(bin_color)
-admin.site.register(location)
+# admin.site.register(location)
 # admin.site.register(Driver)
 admin.site.register(complaintpost)
 # admin.site.register(workupdation)
 # admin.site.register(scheduleingday)
 admin.site.register(Feed_back)
-admin.site.register(product)
+# admin.site.register(product)
 def export_bin(modeladmin, request, queryset):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="Bins.csv"'
@@ -134,6 +134,46 @@ class RegAdmin(admin.ModelAdmin):
     actions = [export_workupdation]
 admin.site.register(workupdation,RegAdmin)
 
+
+
+def export_location(modeladmin, request, queryset):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="location.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['Location','Employee Name','Phone','Driver Name'])
+    registration = queryset.values_list('region','employee_name','phone','status')
+    for i in registration:
+        writer.writerow(i)
+    return response
+
+
+export_location.short_description = 'Export to csv'
+
+
+class RegAdmin(admin.ModelAdmin):
+    list_display = ['region','employee_name','phone','status']
+    actions = [export_location]
+admin.site.register(location,RegAdmin)
+
+
+def export_product(modeladmin, request, queryset):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="product.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['Product Id','Product Name','Product Description','Product Price','Product Image'])
+    registration = queryset.values_list('prd_id','prd_name','prd_discription','prd_price','prd_img')
+    for i in registration:
+        writer.writerow(i)
+    return response
+
+
+export_product.short_description = 'Export to csv'
+
+
+class RegAdmin(admin.ModelAdmin):
+    list_display = ['prd_id','prd_name','prd_discription','prd_price','prd_img']
+    actions = [export_product]
+admin.site.register(product,RegAdmin)
 
 
 
