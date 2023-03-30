@@ -18,6 +18,9 @@ urlpatterns = [
     path('feedback',views.feedback,name='feedback'),
     path('searchbar',views.searchbar,name='searchbar'),
     path('shopping',views.products,name='shopping'),
+    path('news/', views.get_news, name='get_news'),
+    path('cart/', views.cart, name='cart'),
+    path('addcart/<id>/', views.addcart, name='addcart'),
 
 
 

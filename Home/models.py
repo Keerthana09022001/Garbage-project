@@ -1,5 +1,6 @@
 
 from django.db import models
+from accounts.models import Account
 
 import datetime
 
@@ -128,7 +129,14 @@ class product(models.Model):
             return self.prd_name
 
 
+class Cart(models.Model):
+    products = models.ForeignKey(product, on_delete=models.CASCADE)
+    product_qty = models.IntegerField(default=1)
+    price = models.IntegerField(default=0,null=True,blank=True)
 
+    def get_product_price(self):
+        price = [self.product.price]
+        return sum(price)
 
 
 

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from .models import Bins,complaintpost,Feed_back,product
+from django.shortcuts import render,redirect
+from .models import Bins,complaintpost,Feed_back,product,Cart
 
 from django.db.models import Q
 def hom(request):
@@ -25,6 +25,8 @@ def driverregistration(request):
     return render(request, 'driverreg.html')
 def complaint(request):
     return render(request,'complaint.html')
+def cart(request):
+    return render(request,'cart.html')
 
 def feedback(request):
     if request.method == 'POST':
@@ -82,3 +84,32 @@ def searchbar(request):
             print(product_count)
             return render(request,'searchbar.html',{'products':products})
 
+import requests
+def get_news(request):
+    url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=e92090481bc24996a2a89b1f90299cdf'
+    response = requests.get(url)
+    articles = response.json()['articles']
+    return render(request, 'news.html', {
+                    "page": "Newsplatform",
+                    "articles": articles
+                })
+
+def addcart(request,id):
+    print(id)
+    user = request.user
+    print(user)
+    item = product.objects.get(prd_id=id)
+
+
+    if Cart.objects.filter(products_id=item).exists():
+        cart = Cart.objects.all()
+        context = {'newcart': cart}
+        return render(request, 'cart.html', context)
+    else:
+        product_qty = 1
+        price = item.prd_price * product_qty
+        new_cart = Cart(products_id=id,product_qty=product_qty, price=price)
+        new_cart.save()
+        cart=Cart.objects.all()
+        context={'newcart':cart}
+        return render(request,'cart.html',context)
