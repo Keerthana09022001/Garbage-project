@@ -19,8 +19,17 @@ def export_reg(modeladmin, request, queryset):
 export_reg.short_description = 'Export to csv'
 
 
+
 class RegAdmin(admin.ModelAdmin):
     list_display = ['first_name','last_name','email','contact','address','land_mark','pincode','district','role']
     actions = [export_reg]
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 admin.site.register(Account,RegAdmin)
 # Register your models here.

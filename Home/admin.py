@@ -1,7 +1,9 @@
 from django.contrib import admin
 import csv
 from django.http import HttpResponse
-from .models import vehicle,employee,bin_color,Bins,location,Driver,complaintpost,workupdation,scheduleingday,Feed_back,product
+
+from accounts.admin import export_reg
+from .models import vehicle,employee,bin_color,Bins,location,Driver,complaintpost,workupdation,scheduleingday,Feed_back,product,Collection_bin
 from django.contrib.auth.models import Group
 # admin.site.register(Bins)
 # admin.site.register(vehicle)
@@ -9,11 +11,33 @@ from django.contrib.auth.models import Group
 admin.site.register(bin_color)
 # admin.site.register(location)
 # admin.site.register(Driver)
-admin.site.register(complaintpost)
+# admin.site.register(complaintpost)
 # admin.site.register(workupdation)
 # admin.site.register(scheduleingday)
 admin.site.register(Feed_back)
-# admin.site.register(product)
+admin.site.register(Collection_bin)
+def export_complaint(modeladmin, request, queryset):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="Bins.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['Location','Bin Number','Complaint'])
+    registration = queryset.values_list('c_landmark','bin_number','c_complant')
+    for i in registration:
+        writer.writerow(i)
+    return response
+
+
+export_complaint.short_description = 'Export to csv'
+class complaintpostAdmin(admin.ModelAdmin):
+    list_display = ['c_landmark','bin_number','c_complant']
+    actions = [export_reg]
+    def has_add_permission(self, request, obj=None):
+        return False
+    def has_change_permission(self, request, obj=None):
+        return False
+    def has_delete_permission(self, request, obj=None):
+        return False
+admin.site.register(complaintpost,complaintpostAdmin)
 def export_bin(modeladmin, request, queryset):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="Bins.csv"'

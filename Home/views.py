@@ -46,6 +46,7 @@ def Views_bin(request):
 
     return render(request,"see.html",{'Bins':viewbin})
 
+
 def products(request):
     product_value = product.objects.all()
 
@@ -59,8 +60,9 @@ def Complaint(request):
         c_landmark= request.POST.get("c_landmark",True)
         bin_number= request.POST.get("bin_number",True)
         c_complant= request.POST.get("c_complant",True)
-        print(c_landmark,bin_number,c_complant)
-        ins = complaintpost(c_landmark=c_landmark,bin_number=bin_number,c_complant=c_complant)
+        image = request.POST.get("image", True)
+        print(c_landmark,bin_number,c_complant,image)
+        ins = complaintpost(c_landmark=c_landmark,bin_number=bin_number,c_complant=c_complant,image=image)
         print(ins)
         ins.save()
         print("The data has been written to the db")

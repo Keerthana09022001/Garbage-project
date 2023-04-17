@@ -16,6 +16,11 @@
             </form>
           </div>
         </div>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtDBI_DGeh1WZEejPVXosbD1NL1KqLNOo"></script>
+
+
+
+
 </li>
         <title>Bin</title>
         <meta charset="utf-8">
@@ -170,3 +175,22 @@ button{
         </body>
         </html>
 {% endblock content %}
+
+{% block script %}
+<script>
+    function initMap() {
+        var mapOptions = {
+            center: {lat: {{latitude}},lng: {{longitude}}},
+            zoom: 8
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var marker = new google.maps.Marker({
+            position: {lat: {{latitude}},lng: {{longitude}}},
+            map: map,
+            title: "Property location"
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtDBI_DGeh1WZEejPVXosbD1NL1KqLNOo&callback=initMap"></script>
+
+{%endblock%}

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms'
+    'crispy_forms',
+    'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [
@@ -164,3 +165,18 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 RAZORPAY_API_KEY="rzp_test_n7irR21xKIBPBj"
 RAZORPAY_API_SECRET_KEY="4DNQcF66EGnIWV2huNtZXz0Q"
 EMAIL_USE_TLS = True
+
+
+
+LOCATION_FIELD = {
+    'search.provider': 'google',
+
+}
+
+
+LOCATION_FIELD = {
+    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+    'provider.google.api_key': '',
+    'provider.google.api_libraries': '',
+    'provider.google.map.type': 'GOOGLE',
+}
