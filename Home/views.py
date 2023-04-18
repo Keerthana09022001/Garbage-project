@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from .models import Bins,complaintpost,Feed_back,product,Cart
-
+from .models import Bins,complaintpost,Feed_back,product,Cart,location
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 def hom(request):
     return render(request, 'index.html')
@@ -128,4 +128,7 @@ def de_cart(request, id):
 
     return redirect(cart)
 
-
+def location_detail(request, pk):
+    location_obj = get_object_or_404(location, pk=pk)
+    context = {'location': location_obj}
+    return render(request, 'location.html', context)

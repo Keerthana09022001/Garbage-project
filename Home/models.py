@@ -70,6 +70,18 @@ class location(models.Model):
     location1 = PlainLocationField(based_fields=['region'], zoom=7,null=True,blank=True)
     def __str__(self):
             return self.region
+
+    def validate_region(value):
+        if not value.isalpha():
+            raise ValidationError('Region must contain only letters.')
+
+    def validate_phone(value):
+        if not str(value).isdigit() or len(str(value)) != 10:
+            raise ValidationError('Phone number must contain exactly 10 digits.')
+
+    def validate_status(value):
+        if not value.isalpha():
+            raise ValidationError('Status must contain only letters.')
 class scheduleingday(models.Model):
     region = models.ForeignKey(location,verbose_name='region',on_delete=models.DO_NOTHING,default="")
     schedule_id = models.AutoField(primary_key=True)
