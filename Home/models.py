@@ -11,18 +11,58 @@ import re
 
 from django.core.validators import RegexValidator
 
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
+from django.db import models
+
+
 class vehicle(models.Model):
     vehicle_id = models.AutoField(primary_key=True)
-    register_no=models.CharField(max_length=100)
-    regd_owner=models.CharField(max_length=100)
-    reg_address=models.CharField(max_length=100)
-    makers_class=models.CharField(max_length=100)
-    vehicle_class=models.CharField(max_length=100)
-    fuel=models.CharField(max_length=100)
-    engine=models.CharField(max_length=100)
-    insurance=models.CharField(max_length=100)
+    register_no = models.CharField(
+        max_length=100,
+        validators=[
+            RegexValidator(
+                regex=r'^[A-Z]{2}\s[0-9]{2}\s[A-Z]{2}\s[0-9]{4}$',
+                message='Register no. must be in the format XX 00 XX 0000',
+                code='invalid_register_no'
+            ),
+        ]
+    )
+    regd_owner = models.CharField(max_length=100)
+    reg_address = models.CharField(max_length=100)
+    makers_class = models.CharField(max_length=100)
+    vehicle_class = models.CharField(max_length=100)
+    fuel = models.CharField(
+        max_length=100,
+        choices=[('Petrol', 'Petrol'), ('Diesel', 'Diesel'), ('Electric', 'Electric')]
+    )
+    engine = models.CharField(
+        max_length=100,
+        validators=[
+            RegexValidator(
+                regex=r'^[A-Z0-9-]+$',
+                message='Engine no. can only contain uppercase letters, digits, and hyphens',
+                code='invalid_engine_no'
+            ),
+        ]
+    )
+    insurance = models.CharField(
+        max_length=100,
+        validators=[
+            RegexValidator(
+                regex=r'^[A-Z]{2}\s[0-9]{2}\s[A-Z]{2}\s[0-9]{4}$',
+                message='Insurance no. must be in the format XX 00 XX 0000',
+                code='invalid_insurance_no'
+            ),
+        ]
+    )
+
+    def clean(self):
+        if self.insurance == self.register_no:
+            raise ValidationError('Insurance no. cannot be the same as register no.')
+
     def __str__(self):
-            return self. register_no
+        return self.register_no
 
 
 
@@ -33,26 +73,25 @@ class employee(models.Model):
     emp_email=models.CharField(max_length=100, unique=True)
     emp_phone=models.BigIntegerField()
     emp_image=models.ImageField()
-    def __str__(self):
-            return self.emp_name
-
-
 
     def clean(self):
-        # Validation for the emp_name field
-        name_regex = r'^[A-Za-z]+([\ A-Za-z]+)*$'
-        name_validator = RegexValidator(
-            regex=name_regex,
-            message="Name can only contain alphabetic characters and spaces."
-        )
-        emp_name = models.CharField(
-            max_length=100,
-            default='',
-            validators=[name_validator]
-        )
-        validate_email(self.emp_email)  # validate email
-        if not str(self.emp_phone).isdigit():
-            raise ValidationError('Phone number should contain only digits')
+        if not re.match(r'^[a-zA-Z ]+$', self.emp_name):
+            raise ValidationError('Employee name can only contain alphabets and spaces.')
+        # Validate driver email
+        if not self.emp_email:
+            raise ValidationError("Email is required")
+        if "@" not in self.emp_email:
+            raise ValidationError("Email address is not valid")
+
+        # Validate driver phone number
+        if not self.emp_phone:
+            raise ValidationError("Phone number is required")
+        if len(str(self.emp_phone)) < 10 or len(str(self.emp_phone)) > 12:
+            raise ValidationError("Phone number is not valid")
+
+
+    def __str__(self):
+            return self.emp_name
 
 
 class bin_color(models.Model):
@@ -68,20 +107,29 @@ class location(models.Model):
     phone = models.BigIntegerField()
     status = models.CharField(max_length=100)
     location1 = PlainLocationField(based_fields=['region'], zoom=7,null=True,blank=True)
+
     def __str__(self):
-            return self.region
+        return self.region
 
-    def validate_region(value):
-        if not value.isalpha():
-            raise ValidationError('Region must contain only letters.')
+    def clean(self):
+        super().clean()
+        errors = {}
 
-    def validate_phone(value):
-        if not str(value).isdigit() or len(str(value)) != 10:
-            raise ValidationError('Phone number must contain exactly 10 digits.')
+        # region field validation
+        if not re.match(r'^[A-Za-z\s]+$', self.region):
+            errors['region'] = 'Region field should only contain letters and spaces.'
 
-    def validate_status(value):
-        if not value.isalpha():
-            raise ValidationError('Status must contain only letters.')
+        # phone field validation
+        if not (len(str(self.phone)) == 10 and str(self.phone).isdigit()):
+            errors['phone'] = 'Phone number should contain 10 digits.'
+
+        # status field validation
+        if not re.match(r'^[A-Za-z\s]+$', self.status):
+            errors['status'] = 'Status field should only contain letters and spaces.'
+
+        if errors:
+            raise ValidationError(errors)
+
 class scheduleingday(models.Model):
     region = models.ForeignKey(location,verbose_name='region',on_delete=models.DO_NOTHING,default="")
     schedule_id = models.AutoField(primary_key=True)
@@ -118,10 +166,6 @@ class Driver(models.Model):
     driver_location = models.ForeignKey(location, verbose_name=' region', on_delete=models.DO_NOTHING,default="")
     Allocatted_bin=models.ForeignKey(Bins,verbose_name='Bin_name',on_delete=models.DO_NOTHING,default="")
     driver_image = models.ImageField()
-    def __str__(self):
-            return self.driver_name
-
-
 
     def clean(self):
         if not re.match(r'^[a-zA-Z ]+$', self.driver_name):
