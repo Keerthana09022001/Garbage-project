@@ -138,6 +138,12 @@ class scheduleingday(models.Model):
     def __str__(self):
         return self.day
 
+
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+
+
+
 class Bins(models.Model):
     Bin_id = models.AutoField(primary_key=True)
     Bin_name = models.CharField(max_length=100)
@@ -252,32 +258,5 @@ class Cart(models.Model):
 
 
 
-from django.core.validators import RegexValidator
-from django.core.exceptions import ValidationError
 
-class Collection_bin(models.Model):
-    Bin_id = models.AutoField(primary_key=True)
-    Bin_name = models.CharField(max_length=100, unique=True)
-    Bin_color = models.ForeignKey(bin_color, verbose_name='bin_color', on_delete=models.DO_NOTHING, default="")
-    Bin_location = models.ForeignKey(location, verbose_name='region', on_delete=models.DO_NOTHING, default="")
-    Bin_address1 = models.CharField(max_length=100, validators=[RegexValidator(regex='^[\w\-\. ]+$', message='Invalid address.')])
-    Bin_address2 = models.CharField(max_length=100, validators=[RegexValidator(regex='^[\w\-\. ]+$', message='Invalid address.')])
-    Bin_address3 = models.CharField(max_length=100, validators=[RegexValidator(regex='^[\w\-\. ]+$', message='Invalid address.')])
-    pincode = models.BigIntegerField(validators=[RegexValidator(regex='^[0-9]{6}$', message='Invalid pincode.')])
-    distance_KM = models.DecimalField(max_digits=5, decimal_places=2, validators=[RegexValidator(regex='^\d+(\.\d{1,2})?$', message='Invalid distance.')])
-    total_time = models.TimeField(default='00:00:00')
-    Bin_date= models.DateField()
-    Bin_status = models.CharField(max_length=50, choices=[('Active', 'Active'), ('Inactive', 'Inactive')])
-    collections_day = models.ForeignKey(scheduleingday,verbose_name='day',on_delete=models.DO_NOTHING,default="")
-
-    def __str__(self):
-        return self.Bin_name
-
-    def clean(self):
-        super().clean()
-        errors = {}
-        if not self.Bin_date:
-            errors['Bin_date'] = ValidationError('Invalid date.')
-        if errors:
-            raise ValidationError(errors)
 
